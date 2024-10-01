@@ -94,7 +94,7 @@ var total=null
 async function addToCart(id) {
     let cartItems = JSON.parse(localStorage.getItem('cart'))
     // Check if the product already exists in the cart
-    const productIndex = cartItems.findIndex(item => item.id === id);
+    const productIndex = item==null?cartItems.findIndex(item => item.id === id):-1;
     let product=null
     if (productIndex === -1) {
       // Product doesn't exist in the cart, so add it
