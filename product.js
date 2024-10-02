@@ -92,7 +92,8 @@ document.getElementById('close-btn').addEventListener('click',()=>{
 var item=JSON.parse(localStorage.getItem('cart'))?JSON.parse(localStorage.getItem('cart')):[];
 var total=null
 async function addToCart(id) {
-    let cartItems = JSON.parse(localStorage.getItem('cart'))
+    let cartItems = []
+    cartItems=JSON.parse(localStorage.getItem('cart'))
     // Check if the product already exists in the cart
     const productIndex = item==null?cartItems.findIndex(item => item.id === id):-1;
     let product=null
