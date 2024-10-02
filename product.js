@@ -75,9 +75,8 @@ document.getElementById('btn').addEventListener("click",()=>{
 document.getElementById('item').addEventListener("click",()=>{
     document.getElementById("itemcart").style.display="block"
     document.getElementsByTagName("body")[0].style.overflow="hidden"
-   
-    console.log(JSON.parse(localStorage.getItem('cart')))
     display()
+    
 })
 // hiding cart
 
@@ -93,11 +92,10 @@ var item=JSON.parse(localStorage.getItem('cart'))?JSON.parse(localStorage.getIte
 var total=0
 function addToCart(id) {
     let pr=JSON.parse(localStorage.getItem('cart'))
-    console.log(pr)
     let cartItems =pr?pr:[];
     // Check if the product already exists in the cart
     let productIndex =-1// pr==[]?cartItems.findIndex(pr=> Number(pr.id) === Number(id)):-1;
-    for (const element of pr) {
+    for (const element of cartItems) {
       if(element.id === id){
         productIndex=true
       }
