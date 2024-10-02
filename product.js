@@ -89,19 +89,26 @@ document.getElementById('close-btn').addEventListener('click',()=>{
 
 
 // implementing add to cart functionality
-var item=JSON.parse(localStorage.getItem('cart'))?JSON.parse(localStorage.getItem('cart')):[];
-var total=null
-async function addToCart(id) {
+var item=JSON.parse(localStorage.getItem('cart'))?JSON.parse(localStorage.getItem('cart')):null;
+var total=0
+function addToCart(id) {
     let pr=JSON.parse(localStorage.getItem('cart'))
+    console.log(pr)
     let cartItems =pr?pr:[];
     // Check if the product already exists in the cart
-    const productIndex = item==null?cartItems.findIndex(item => item.id === id):-1;
+    let productIndex =-1// pr==[]?cartItems.findIndex(pr=> Number(pr.id) === Number(id)):-1;
+    for (const element of pr) {
+      if(element.id === id){
+        productIndex=true
+      }
+    }
     let product=null
     if (productIndex === -1) {
       // Product doesn't exist in the cart, so add it
       product=findproduct(id)
       product.quantity=1;
       product.total=product.price
+      total+=product.total
       cartItems.push(product);
       const toaster=document.getElementById("toaster")
       toaster.innerHTML="item added successfully"
@@ -112,14 +119,13 @@ async function addToCart(id) {
         toaster.innerHTML="item already added"
         toaster.style.backgroundColor="red"
         showToaster()
-      return 
+        return 
     }
-  
-    // Save the updated cart to local storage
+    //Save the updated cart to local storage
     localStorage.setItem('cart',JSON.stringify(cartItems))
-     item=JSON.parse(localStorage.getItem('cart'))
-     display()
-  }
+    item=JSON.parse(localStorage.getItem('cart'))
+    display()
+}
 
 function findproduct(id){
     for (const element of productItme) {
@@ -151,6 +157,8 @@ function display() {
         parent.appendChild(newCard);
     })
     document.getElementById('i').innerText=item.length
+    document.getElementById("total").innerText=total
+
 }
 
 function removeItem(id){
