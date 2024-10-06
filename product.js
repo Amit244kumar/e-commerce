@@ -228,8 +228,6 @@ function decrement(id){
 }
 
 
-
-
 function showToaster() {
     const toaster = document.getElementById('toaster');
     toaster.classList.remove('hidden');
@@ -241,4 +239,17 @@ function showToaster() {
       toaster.classList.add('hidden');
     }, 2000);
 }
-  
+
+function send(){
+  alert("D")
+    const param={
+      name:"bablu",
+      email:"giribablu98@gmail.com",
+      subject:"hello bhai ho gya kam ",
+      message:"testing"
+    }
+    emailjs.send("service_bi76fsl","template_0w7ujnm",param)
+    .then((msg)=>{
+      console.log(msg)
+    })
+}
